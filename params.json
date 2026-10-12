@@ -1,0 +1,121 @@
+{
+  "_readme": "All lengths in mm. Keys starting with '_' are notes and are ignored. Run: python generate.py [other_params.json]",
+
+  "rail": {
+    "_note": "MIL-STD-1913 Picatinny profile. Only change these if your rail measures differently.",
+    "RAIL_TOP_WIDTH": 21.2,
+    "RAIL_APEX_WIDTH": 15.6,
+    "_RAIL_APEX_WIDTH": "Width at the point of the 'V' on each side (narrowest point of the dovetail)",
+    "RAIL_SLOT_PITCH": 10.01,
+    "RAIL_SLOT_WIDTH": 5.23,
+    "RAIL_SLOT_DEPTH": 3.0
+  },
+
+  "clamp": {
+    "_note": "Two-piece cross-bolt clamp: the fixed jaw is part of the body, the moving jaw is a separate part pulled in by the bolts. The bolts sit in the rail's recoil slots.",
+    "BODY_LENGTH": 46.0,
+    "_BODY_LENGTH": "Length along the rail (X); also the housing length",
+    "CLAMP_WALL": 3.0,
+    "_CLAMP_WALL": "Side wall outside the rail top width",
+    "CLAMP_FLOOR": 4.0,
+    "_CLAMP_FLOOR": "Material between the base plate top and the rail top",
+    "JAW_DEPTH": 4.0,
+    "_JAW_DEPTH": "How far the jaws reach up past the rail top (rail top -> clamp top)",
+    "RAIL_CLEARANCE": 0.1,
+    "_RAIL_CLEARANCE": "Gap on each flank between rail and jaw",
+    "FLOOR_GAP": 0.3,
+    "_FLOOR_GAP": "Gap under the rail top so the clamp pulls on the flanks, not the top",
+    "JAW_SPLIT_Y": 4.0,
+    "_JAW_SPLIT_Y": "Where the moving jaw is split off from the body (Y from rail centre line)",
+    "JAW_GAP": 1.0,
+    "_JAW_GAP": "Clamping travel between moving jaw and body",
+    "BOLT_COUNT": 2,
+    "BOLT_SPACING_SLOTS": 2,
+    "_BOLT_SPACING_SLOTS": "Bolt spacing in rail slot pitches (2 = 20.02 mm)",
+    "BOLT_DIAMETER": 5.0,
+    "BOLT_HOLE_CLEARANCE": 0.3,
+    "BOLT_FROM_RAIL_TOP": 0.4,
+    "_BOLT_FROM_RAIL_TOP": "Bolt centre measured from the rail top into the rail; the bolt must stay inside RAIL_SLOT_DEPTH",
+    "NUT_ACROSS_FLATS": 8.0,
+    "NUT_THICKNESS": 4.0,
+    "NUT_CLEARANCE": 0.25,
+    "NUT_RECESS": 3.0,
+    "_NUT_RECESS": "Extra depth of the nut pocket past the nut, so the bolt tip stays below the surface",
+    "BASE_PLATE": 3.0,
+    "_BASE_PLATE": "Plate the moving jaw rests on; also the roof of the leg bore"
+  },
+
+  "housing": {
+    "_note": "Hangs under the clamp. Holds the leg (keyed so it cannot spin) and the thumb wheel pocket.",
+    "HOUSING_WIDTH": 24.0,
+    "_HOUSING_WIDTH": "Across the rifle (Y). The wheel sticks out past this on both sides",
+    "TRAVEL": 30.0,
+    "_TRAVEL": "Height adjustment range. The housing grows by this much",
+    "LOWER_GUIDE": 16.0,
+    "_LOWER_GUIDE": "Keyed bore length under the wheel pocket (was 10) - longer guide = less leg wobble",
+    "POCKET_CLEARANCE_DIA": 0.8,
+    "POCKET_CLEARANCE_HEIGHT": 0.3,
+    "_POCKET_CLEARANCE_HEIGHT": "Total up/down gap for the wheel (was 0.8) - this is the leg's up/down play",
+    "BORE_CLEARANCE": 0.2,
+    "_BORE_CLEARANCE": "Radial gap between the leg thread crests and the housing bore",
+    "EDGE_RADIUS": 2.0
+  },
+
+  "thread": {
+    "_note": "45 degree flanks so both the leg and the wheel print without supports. One wheel turn moves the leg THREAD_PITCH mm.",
+    "THREAD_MAJOR_DIAMETER": 18.0,
+    "THREAD_PITCH": 4.0,
+    "THREAD_DEPTH": 1.2,
+    "THREAD_CLEARANCE": 0.15,
+    "_THREAD_CLEARANCE": "Added to the wheel's internal thread, radially and axially. Raise if the wheel binds"
+  },
+
+  "leg": {
+    "KEY_WIDTH": 5.0,
+    "_KEY_WIDTH": "Width of the anti-rotation groove along the leg",
+    "KEY_GROOVE_RADIUS": 6.5,
+    "_KEY_GROOVE_RADIUS": "Radius of the groove floor (thread minor radius is major/2 - depth)",
+    "KEY_CLEARANCE": 0.12,
+    "_KEY_CLEARANCE": "Gap on each side of the key rib (was 0.3) - sets how much the leg can twist",
+    "LEG_EXPOSED": 6.0,
+    "_LEG_EXPOSED": "Leg left showing under the housing when fully retracted",
+    "COLLAR_HEIGHT": 4.0,
+    "_COLLAR_HEIGHT": "45 degree collar where the leg meets the sled; must be less than LEG_EXPOSED"
+  },
+
+  "sled": {
+    "_note": "Sled foot runs along the rail so the rifle slides straight back under recoil. Both ends curl up like sledge runners; the curve starts at 45 degrees so it prints without supports.",
+    "SLED_LENGTH": 90.0,
+    "_SLED_LENGTH": "Overall, tip to tip",
+    "SLED_WIDTH": 34.0,
+    "SLED_THICKNESS": 7.0,
+    "_SLED_THICKNESS": "Deck thickness in the middle",
+    "SLED_TIP_HEIGHT": 16.0,
+    "_SLED_TIP_HEIGHT": "Top of the curled tips above the running surface",
+    "SLED_TIP_THICKNESS": 6.0,
+    "SLED_CURVE_RADIUS": 14.0,
+    "_SLED_CURVE_RADIUS": "Radius of the runner curve at each end",
+    "SLED_TIP_FILLET": 4.0,
+    "_SLED_TIP_FILLET": "Concave curve where the tips rise out of the deck",
+    "SLED_CORNER_RADIUS": 10.0,
+    "_SLED_CORNER_RADIUS": "Corner rounding seen from above"
+  },
+
+  "wheel": {
+    "WHEEL_DIAMETER": 34.0,
+    "WHEEL_THICKNESS": 12.0,
+    "KNURL_COUNT": 24,
+    "KNURL_RADIUS": 1.2,
+    "WHEEL_CHAMFER": 1.0
+  },
+
+  "output": {
+    "_note": "Point these somewhere else in a copy of this file to keep several variants side by side.",
+    "OUTPUT_PREFIX": "monopod",
+    "_OUTPUT_PREFIX": "Writes <prefix>_body.stl, _jaw.stl, _wheel.stl, _leg.stl",
+    "PREVIEW": true,
+    "PREVIEW_FILE": "monopod_preview.png",
+    "PREVIEW_RAIL": true,
+    "_PREVIEW_RAIL": "Draw a ghost Picatinny rail in the preview to check the fit"
+  }
+}
