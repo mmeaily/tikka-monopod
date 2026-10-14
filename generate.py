@@ -32,7 +32,8 @@ Hardware:
     at the end of the run).
 
 Assembly:
-    1. Drop the nuts into the hex pockets on the body.
+    1. Drop the nuts into the hex pockets on the outside of the
+       body's fixed (-Y) side.
     2. Slide the wheel into the pocket from the open (+Y) side.
     3. Push the leg up through the bottom of the housing, groove
        lined up with the key rib, and turn the wheel to draw it in.
@@ -125,6 +126,7 @@ NUT_ACROSS_FLATS = param("NUT_ACROSS_FLATS")
 NUT_THICKNESS = param("NUT_THICKNESS")
 NUT_CLEARANCE = param("NUT_CLEARANCE")
 NUT_RECESS = param("NUT_RECESS")
+NUT_WALL = param("NUT_WALL")
 BASE_PLATE = param("BASE_PLATE")
 
 # Housing
@@ -210,7 +212,14 @@ rail_half = RAIL_TOP_WIDTH / 2.0
 apex_half = RAIL_APEX_WIDTH / 2.0
 flank_height = rail_half - apex_half          # 45 degree flanks
 
-clamp_width = RAIL_TOP_WIDTH + 2.0 * CLAMP_WALL
+# The fixed (-Y) side is thicker: it holds the nuts completely
+# outside the rail, with NUT_WALL of solid wall between nut and rail
+# for the nut to pull against.
+nut_inner_y = -(rail_half + RAIL_CLEARANCE + NUT_WALL)
+nut_outer_y = nut_inner_y - NUT_THICKNESS
+clamp_y_min = nut_outer_y - NUT_RECESS
+clamp_y_max = rail_half + CLAMP_WALL
+clamp_width = clamp_y_max - clamp_y_min
 clamp_top = CLAMP_FLOOR + JAW_DEPTH
 half_length = BODY_LENGTH / 2.0
 
@@ -221,7 +230,7 @@ bolt_xs = [
     (index - (BOLT_COUNT - 1) / 2.0) * bolt_spacing
     for index in range(BOLT_COUNT)
 ]
-nut_pocket_depth = NUT_THICKNESS + NUT_RECESS
+nut_pocket_af = NUT_ACROSS_FLATS + NUT_CLEARANCE
 
 thread_major_radius = THREAD_MAJOR_DIAMETER / 2.0
 thread_minor_radius = thread_major_radius - THREAD_DEPTH
@@ -271,11 +280,29 @@ if KEY_GROOVE_RADIUS >= thread_minor_radius:
         f"minor radius {thread_minor_radius:.2f}"
     )
 
-if BOLT_FROM_RAIL_TOP + BOLT_DIAMETER / 2.0 > RAIL_SLOT_DEPTH:
+if BOLT_FROM_RAIL_TOP + BOLT_DIAMETER / 2.0 > RAIL_SLOT_DEPTH - 0.5:
     problems.append(
-        "Bolt would hit the bottom of the rail slot: lower "
-        "BOLT_FROM_RAIL_TOP or BOLT_DIAMETER"
+        "Bolt comes within 0.5 mm of the bottom of the rail slot "
+        "(rails vary): lower BOLT_FROM_RAIL_TOP"
     )
+
+if BOLT_FROM_RAIL_TOP + BOLT_DIAMETER / 2.0 < 1.5:
+    problems.append(
+        "Bolt reaches less than 1.5 mm into the rail slot: raise "
+        "BOLT_FROM_RAIL_TOP"
+    )
+
+if bolt_z + nut_pocket_af / 2.0 > clamp_top:
+    problems.append(
+        f"Nut pocket pokes {bolt_z + nut_pocket_af / 2.0 - clamp_top:.2f} mm "
+        "out of the clamp top: lower BOLT_FROM_RAIL_TOP or raise JAW_DEPTH"
+    )
+
+if bolt_z - nut_pocket_af / 2.0 < -BASE_PLATE + 1.0:
+    problems.append("Nut pocket leaves less than 1 mm of base plate under it")
+
+if NUT_WALL < 1.5:
+    problems.append("NUT_WALL below 1.5 mm will crack when the bolts are tightened")
 
 if BOLT_DIAMETER > RAIL_SLOT_WIDTH:
     problems.append("BOLT_DIAMETER is wider than RAIL_SLOT_WIDTH")
@@ -474,7 +501,7 @@ cavity_points = [
 
 clamp_block = box(
     -half_length, half_length,
-    -clamp_width / 2.0, clamp_width / 2.0,
+    clamp_y_min, clamp_y_max,
     0.0, clamp_top
 )
 
@@ -490,7 +517,7 @@ for x in bolt_xs:
         )
     )
 
-big = clamp_width
+big = 2.0 * clamp_width
 
 clamp_fixed = clamp_block.intersect(
     box(-big, big, -big, JAW_SPLIT_Y - JAW_GAP, -1.0, clamp_top + 1.0)
@@ -500,26 +527,16 @@ jaw = clamp_block.intersect(
     box(-big, big, JAW_SPLIT_Y, big, -1.0, clamp_top + 1.0)
 )
 
-# Nut pockets on the fixed (-Y) side.  With the nut this close to
-# the rail they may break out of the clamp top; the hex sides still
-# stop the nut turning.
-for x in bolt_xs:
-    clamp_fixed = clamp_fixed.cut(
-        hex_y(
-            NUT_ACROSS_FLATS + NUT_CLEARANCE, x, bolt_z,
-            -clamp_width / 2.0 - 1.0,
-            -clamp_width / 2.0 + nut_pocket_depth
-        )
-    )
-
 
 # ============================================================
 # BODY: FIXED CLAMP + BASE PLATE + HOUSING
 # ============================================================
 
+# Stops short of the moving jaw's outer face so the bolt heads,
+# which hang below z = 0, pull on the jaw and not on the plate.
 base_plate = box(
     -half_length, half_length,
-    -clamp_width / 2.0, clamp_width / 2.0,
+    clamp_y_min, clamp_y_max - JAW_GAP - 0.5,
     -BASE_PLATE, 0.0
 )
 
@@ -537,6 +554,14 @@ if EDGE_RADIUS > 0:
         print(f"WARNING: edge fillet skipped: {error}")
 
 body = clamp_fixed.union(base_plate).union(housing)
+
+# Nut pockets in the fixed (-Y) side, entirely outside the rail.
+# Cut after the base plate is added so the pocket can dip into it.
+# Tightening pulls the nut inwards against NUT_WALL.
+for x in bolt_xs:
+    body = body.cut(
+        hex_y(nut_pocket_af, x, bolt_z, clamp_y_min - 1.0, nut_inner_y)
+    )
 
 # Leg bore, up to the underside of the base plate.
 body = body.cut(cylinder_z(bore_radius, housing_bottom - 1.0, -BASE_PLATE))
@@ -875,22 +900,19 @@ def rail_ghost():
 def bolts_ghost():
 
     shapes = None
-    head_radius = BOLT_DIAMETER * 0.8
+    head_radius = BOLT_DIAMETER * 0.85
     for x in bolt_xs:
+        head_y = clamp_y_max - JAW_GAP
         bolt = cylinder_y(
             BOLT_DIAMETER / 2.0, x, bolt_z,
-            -clamp_width / 2.0 + NUT_RECESS, clamp_width / 2.0
+            nut_outer_y, head_y
         ).union(
             cylinder_y(
                 head_radius, x, bolt_z,
-                clamp_width / 2.0, clamp_width / 2.0 + BOLT_DIAMETER
+                head_y, head_y + BOLT_DIAMETER
             )
         ).union(
-            hex_y(
-                NUT_ACROSS_FLATS, x, bolt_z,
-                -clamp_width / 2.0 + NUT_RECESS,
-                -clamp_width / 2.0 + nut_pocket_depth
-            )
+            hex_y(NUT_ACROSS_FLATS, x, bolt_z, nut_outer_y, nut_inner_y)
         )
         shapes = bolt if shapes is None else shapes.union(bolt)
     return shapes
@@ -1034,9 +1056,11 @@ if PREVIEW:
 # FINAL REPORT
 # ============================================================
 
-# Bolt runs from the moving jaw face (gap closed) into the nut.
-bolt_min = (clamp_width - JAW_GAP) - nut_pocket_depth + NUT_THICKNESS
-bolt_max = (clamp_width - JAW_GAP) - 0.5
+# Bolt runs from the moving jaw face (gap closed) through the nut;
+# at least flush with the nut, tip still below the outer face.
+head_face = clamp_y_max - JAW_GAP
+bolt_min = head_face - nut_outer_y
+bolt_max = head_face - clamp_y_min - 0.5
 standard = [12, 16, 20, 25, 30, 35, 40, 45, 50]
 fitting = [length for length in standard if bolt_min <= length <= bolt_max]
 bolt_text = (
