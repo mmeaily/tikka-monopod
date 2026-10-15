@@ -80,7 +80,7 @@ body 84 × 29 mm and 50 mm below the rail top, clamp 46 mm long.
   the TACT A1 (of 1.5 / 2.0 / 2.5). Keep `JAW_LIP` at 1.5.
 - [x] Recoil lugs now run right across the clamp floor, on the moving jaw
   as well as the fixed half, out to the walls.
-- [ ] Commit the linkage redesign (currently uncommitted).
+- [x] Committed the linkage redesign, screw clip and rail fix (ac2b61c).
 - [ ] First test print and fit on the rifle.
 
 ## Open questions / things to check on the first print
