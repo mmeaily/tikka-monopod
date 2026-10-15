@@ -3,24 +3,25 @@
 
   "rail": {
     "_note": "MIL-STD-1913 Picatinny profile. Only change these if your rail measures differently.",
-    "RAIL_TOP_WIDTH": 21.2,
-    "RAIL_APEX_WIDTH": 15.6,
-    "_RAIL_APEX_WIDTH": "Width at the point of the 'V' on each side (narrowest point of the dovetail)",
+    "RAIL_WIDTH": 21.2,
+    "_RAIL_WIDTH": "Across the rail at its widest point, the outward point on each side",
+    "RAIL_NECK_WIDTH": 15.6,
+    "_RAIL_NECK_WIDTH": "Width of the rail's top face, and of the neck where it meets the rifle. The sides run out from the top face to RAIL_WIDTH and back in to the neck at 45 degrees",
     "RAIL_SLOT_PITCH": 10.01,
     "RAIL_SLOT_WIDTH": 5.23,
     "RAIL_SLOT_DEPTH": 3.0
   },
 
   "clamp": {
-    "_note": "Two-piece cross-bolt clamp: the fixed jaw is part of the body, the moving jaw is a separate part pulled in by the bolts. The bolts sit in the rail's recoil slots.",
-    "BODY_LENGTH": 46.0,
-    "_BODY_LENGTH": "Length along the rail (X); also the housing length",
+    "_note": "Two-piece clamp: the fixed jaw is part of the body, the moving jaw is a separate part pulled in by bolts that run across under the rail into nuts slid into traps in the fixed side. Printed recoil lugs on the clamp floor sit in the rail's cross slots.",
+    "CLAMP_LENGTH": 46.0,
+    "_CLAMP_LENGTH": "Length of the rail clamp along the rail (X). The body under it is longer; its length comes from the linkage",
     "CLAMP_WALL": 3.0,
-    "_CLAMP_WALL": "Side wall outside the rail top width on the moving jaw (+Y) side. The fixed (-Y) side is sized to hold the nut, see NUT_WALL",
-    "CLAMP_FLOOR": 4.0,
-    "_CLAMP_FLOOR": "Material between the base plate top and the rail top",
-    "JAW_DEPTH": 4.0,
-    "_JAW_DEPTH": "How far the jaws reach up past the rail top (rail top -> clamp top)",
+    "_CLAMP_WALL": "Side wall outside the rail top width",
+    "CLAMP_FLOOR": 10.6,
+    "_CLAMP_FLOOR": "Base plate top to rail top. The clamp bolts and nut traps run through here, under the rail",
+    "JAW_LIP": 1.5,
+    "_JAW_LIP": "How far the jaw lips hook up under the rail's widest point, towards the rifle. Must stay short of the neck ((RAIL_WIDTH - RAIL_NECK_WIDTH) / 2 = 2.8)",
     "RAIL_CLEARANCE": 0.1,
     "_RAIL_CLEARANCE": "Gap on each flank between rail and jaw",
     "FLOOR_GAP": 0.3,
@@ -30,63 +31,98 @@
     "JAW_GAP": 1.0,
     "_JAW_GAP": "Clamping travel between moving jaw and body",
     "BOLT_COUNT": 2,
-    "BOLT_SPACING_SLOTS": 2,
-    "_BOLT_SPACING_SLOTS": "Bolt spacing in rail slot pitches (2 = 20.02 mm)",
-    "BOLT_DIAMETER": 5.0,
-    "BOLT_HOLE_CLEARANCE": 0.3,
-    "BOLT_FROM_RAIL_TOP": -0.3,
-    "_BOLT_FROM_RAIL_TOP": "Bolt centre measured from the rail top into the rail (negative = below the rail top). Keeps the bolt clear of the slot bottom and the nut inside the clamp height",
-    "NUT_ACROSS_FLATS": 8.0,
-    "NUT_THICKNESS": 4.0,
-    "NUT_CLEARANCE": 0.25,
-    "NUT_RECESS": 2.0,
-    "_NUT_RECESS": "How far the nut sits below the outer face of the fixed side, so the bolt tip stays below the surface",
-    "NUT_WALL": 2.0,
-    "_NUT_WALL": "Solid wall between the nut and the rail flank; the nut is pulled against it when the bolts are tightened",
-    "BASE_PLATE": 3.0,
-    "_BASE_PLATE": "Plate the moving jaw rests on; also the roof of the leg bore"
+    "BOLT_SPACING": 32.0,
+    "_BOLT_SPACING": "Clamp bolt centre to centre along the rail; keep the nut traps clear of the recoil lugs",
+    "LUG_COUNT": 2,
+    "LUG_SPACING_SLOTS": 1,
+    "_LUG_SPACING_SLOTS": "Recoil lug spacing in rail slot pitches (1 = 10.01 mm)",
+    "LUG_HEIGHT": 2.0,
+    "_LUG_HEIGHT": "How far the lugs reach into the rail slots (slots are RAIL_SLOT_DEPTH deep)",
+    "LUG_WIDTH": 4.8,
+    "_LUG_WIDTH": "Along the rail; the slots are RAIL_SLOT_WIDTH wide",
+    "BASE_PLATE": 4.0,
+    "_BASE_PLATE": "Plate the moving jaw rests on; also the roof of the screw channel"
   },
 
-  "housing": {
-    "_note": "Hangs under the clamp. Holds the leg (keyed so it cannot spin) and the thumb wheel pocket.",
-    "HOUSING_WIDTH": 24.0,
-    "_HOUSING_WIDTH": "Across the rifle (Y). The wheel sticks out past this on both sides",
-    "TRAVEL": 30.0,
-    "_TRAVEL": "Height adjustment range. The housing grows by this much",
-    "LOWER_GUIDE": 16.0,
-    "_LOWER_GUIDE": "Keyed bore length under the wheel pocket (was 10) - longer guide = less leg wobble",
-    "POCKET_CLEARANCE_DIA": 0.8,
-    "POCKET_CLEARANCE_HEIGHT": 0.3,
-    "_POCKET_CLEARANCE_HEIGHT": "Total up/down gap for the wheel (was 0.8) - this is the leg's up/down play",
-    "BORE_CLEARANCE": 0.2,
-    "_BORE_CLEARANCE": "Radial gap between the leg thread crests and the housing bore",
+  "body": {
+    "_note": "Open-bottomed channel under the clamp that holds the lead screw, slider and links.",
+    "WALL": 5.0,
+    "_WALL": "Side wall thickness",
+    "END_WALL": 5.0,
+    "_END_WALL": "End walls carry the screw: the knob pushes on one, the screw tip sits in the other",
+    "BOTTOM_WALL": 5.0,
+    "_BOTTOM_WALL": "Material under the leg pin hole and under the slider pin slots, along the bottom edge of the side walls. The leg's load comes in here",
+    "SIDE_CLEARANCE": 0.3,
+    "_SIDE_CLEARANCE": "Gap on each side between parts that slide or swing past each other",
     "EDGE_RADIUS": 2.0
   },
 
-  "thread": {
-    "_note": "45 degree flanks so both the leg and the wheel print without supports. One wheel turn moves the leg THREAD_PITCH mm.",
-    "THREAD_MAJOR_DIAMETER": 18.0,
-    "THREAD_PITCH": 4.0,
-    "THREAD_DEPTH": 1.2,
-    "THREAD_CLEARANCE": 0.15,
-    "_THREAD_CLEARANCE": "Added to the wheel's internal thread, radially and axially. Raise if the wheel binds"
+  "screw": {
+    "_note": "Printed lead screw along the rail, 45 degree flanks so it prints upright without supports. Self-locking, so the leg stays put.",
+    "SCREW_DIAMETER": 12.0,
+    "SCREW_PITCH": 3.0,
+    "_SCREW_PITCH": "Slider travel per knob turn",
+    "SCREW_THREAD_DEPTH": 1.0,
+    "SCREW_THREAD_CLEARANCE": 0.15,
+    "_SCREW_THREAD_CLEARANCE": "Added to the slider's internal thread, radially and axially. Raise if the slider binds",
+    "SCREW_HOLE_CLEARANCE": 0.3,
+    "_SCREW_HOLE_CLEARANCE": "Radial gap for the screw journal and tip in the end walls",
+    "CLIP_DIAMETER": 15.0,
+    "CLIP_THICKNESS": 3.0,
+    "CLIP_SNAP": 0.5,
+    "_CLIP_SNAP": "How much narrower the retaining clip's slot is than the groove it snaps over. Raise if the clip falls off, lower if it will not go on"
   },
 
-  "leg": {
-    "KEY_WIDTH": 5.0,
-    "_KEY_WIDTH": "Width of the anti-rotation groove along the leg",
-    "KEY_GROOVE_RADIUS": 6.5,
-    "_KEY_GROOVE_RADIUS": "Radius of the groove floor (thread minor radius is major/2 - depth)",
-    "KEY_CLEARANCE": 0.12,
-    "_KEY_CLEARANCE": "Gap on each side of the key rib (was 0.3) - sets how much the leg can twist",
-    "LEG_EXPOSED": 6.0,
-    "_LEG_EXPOSED": "Leg left showing under the housing when fully retracted",
-    "COLLAR_HEIGHT": 4.0,
-    "_COLLAR_HEIGHT": "45 degree collar where the leg meets the sled; must be less than LEG_EXPOSED"
+  "slider": {
+    "SLIDER_LENGTH": 14.0,
+    "_SLIDER_LENGTH": "Length of thread engagement",
+    "SLIDER_WALL": 3.0,
+    "_SLIDER_WALL": "Material around the screw thread"
+  },
+
+  "linkage": {
+    "_note": "Leg pivots at the knob end of the body; twin links run from the slider pin down to the leg. Run the generator to see the height range and how far one knob turn moves the foot.",
+    "LEG_LENGTH": 75.0,
+    "_LEG_LENGTH": "Leg pin to foot pin. Longer = more height range",
+    "LINK_PIVOT": 32.0,
+    "_LINK_PIVOT": "Leg pin to link pin, along the leg",
+    "LINK_LENGTH": 34.0,
+    "_LINK_LENGTH": "Link pin to slider pin",
+    "LEG_ANGLE_MIN": 26.0,
+    "_LEG_ANGLE_MIN": "Leg angle below horizontal when fully retracted (slider against the far end wall)",
+    "LEG_ANGLE_MAX": 70.0,
+    "_LEG_ANGLE_MAX": "Leg angle when fully extended (slider runs off the thread onto the screw journal)",
+    "LEG_WIDTH": 10.0,
+    "_LEG_WIDTH": "Leg thickness across the rifle; also the slider tongue the links straddle",
+    "LEG_DEPTH": 12.0,
+    "_LEG_DEPTH": "Depth of the leg beam",
+    "LEG_HUB_RADIUS": 7.0,
+    "_LEG_HUB_RADIUS": "Round ends of the leg around the leg and foot pins",
+    "LINK_THICKNESS": 4.0,
+    "LINK_END_RADIUS": 5.5
+  },
+
+  "hardware": {
+    "_note": "Every joint uses the same bolt: socket head, washer under the head, plain hex nut. The run checks each joint reaches through its nut.",
+    "BOLT_DIAMETER": 5.0,
+    "BOLT_LENGTH": 25.0,
+    "_BOLT_LENGTH": "Under-head length",
+    "BOLT_HOLE_CLEARANCE": 0.3,
+    "BOLT_HEAD_DIAMETER": 8.5,
+    "BOLT_HEAD_HEIGHT": 5.0,
+    "WASHER_DIAMETER": 10.0,
+    "WASHER_THICKNESS": 1.0,
+    "NUT_ACROSS_FLATS": 8.0,
+    "NUT_THICKNESS": 4.0,
+    "NUT_CLEARANCE": 0.25,
+    "BUSHING_DIAMETER": 8.5,
+    "_BUSHING_DIAMETER": "Printed tube the slider, link and foot pins turn on; the bolt clamps it solid so the plain nut can be tightened",
+    "BUSHING_CLEARANCE": 0.2,
+    "_BUSHING_CLEARANCE": "Radial gap between the bushing and the hole it turns in"
   },
 
   "sled": {
-    "_note": "Sled foot runs along the rail so the rifle slides straight back under recoil. Both ends curl up like sledge runners; the curve starts at 45 degrees so it prints without supports.",
+    "_note": "Sled foot runs along the rail so the rifle slides straight back under recoil, and pivots on the end of the leg so it stays flat at any height. Both ends curl up like sledge runners; the curve starts at 45 degrees so it prints without supports.",
     "SLED_LENGTH": 90.0,
     "_SLED_LENGTH": "Overall, tip to tip",
     "SLED_WIDTH": 34.0,
@@ -100,24 +136,33 @@
     "SLED_TIP_FILLET": 4.0,
     "_SLED_TIP_FILLET": "Concave curve where the tips rise out of the deck",
     "SLED_CORNER_RADIUS": 10.0,
-    "_SLED_CORNER_RADIUS": "Corner rounding seen from above"
+    "_SLED_CORNER_RADIUS": "Corner rounding seen from above",
+    "FOOT_PIVOT_HEIGHT": 8.0,
+    "_FOOT_PIVOT_HEIGHT": "Foot pin above the deck top",
+    "CHEEK_THICKNESS": 4.0,
+    "_CHEEK_THICKNESS": "Cheeks either side of the leg end"
   },
 
-  "wheel": {
-    "WHEEL_DIAMETER": 34.0,
-    "WHEEL_THICKNESS": 12.0,
-    "KNURL_COUNT": 24,
+  "knob": {
+    "_note": "Printed in one piece with the lead screw, on the knob end of the body. Engraved UP with a clockwise arrow.",
+    "KNOB_DIAMETER": 28.0,
+    "KNOB_THICKNESS": 12.0,
+    "KNURL_COUNT": 20,
     "KNURL_RADIUS": 1.2,
-    "WHEEL_CHAMFER": 1.0
+    "KNOB_CHAMFER": 1.0,
+    "KNOB_GAP": 0.3,
+    "_KNOB_GAP": "Gap between the knob and the end wall in the preview"
   },
 
   "output": {
     "_note": "Point these somewhere else in a copy of this file to keep several variants side by side.",
     "OUTPUT_PREFIX": "monopod",
-    "_OUTPUT_PREFIX": "Writes <prefix>_body.stl, _jaw.stl, _wheel.stl, _leg.stl",
+    "_OUTPUT_PREFIX": "Writes <prefix>_body.stl, _jaw.stl, _screw.stl, _slider.stl, _link.stl, _leg.stl, _foot.stl, _bushing.stl",
     "PREVIEW": true,
     "PREVIEW_FILE": "monopod_preview.png",
     "PREVIEW_RAIL": true,
-    "_PREVIEW_RAIL": "Draw a ghost Picatinny rail in the preview to check the fit"
+    "_PREVIEW_RAIL": "Draw a ghost Picatinny rail in the preview to check the fit",
+    "CHECK_CLEARANCES": true,
+    "_CHECK_CLEARANCES": "Check the moving parts for overlaps at both ends and the middle of the travel (slower)"
   }
 }
