@@ -50,8 +50,8 @@ Knob → printed lead screw (along the rail) → slider → twin links → leg a
   slider-pin slots bridge). Slider prints standing on end, screw knob-down,
   leg and links flat, foot deck-down. No supports.
 
-Current numbers: rail to ground 90–127 mm, 12.9 knob turns end to end,
-body 84 × 29 mm and 50 mm below the rail top, clamp 46 mm long.
+Current numbers: rail to ground 93–128 mm, 12.6 knob turns end to end,
+body 86 × 30 mm and 51 mm below the rail top, clamp 46 × 29 mm.
 
 ## Progress
 
@@ -81,6 +81,14 @@ body 84 × 29 mm and 50 mm below the rail top, clamp 46 mm long.
 - [x] Recoil lugs now run right across the clamp floor, on the moving jaw
   as well as the fixed half, out to the walls.
 - [x] Committed the linkage redesign, screw clip and rail fix (ac2b61c).
+- [x] Set up for max-strength PETG (Bambu PETG HF, A1) in
+  `monopod_body.3mf`: 6 walls, 100% infill, 255 °C. Tightened clearances
+  (side 0.2, bushing 0.15, bolt/screw holes 0.2, nuts 0.2). Thickened for
+  high-calibre use: lugs 2.5 × 5.0, links and foot cheeks 4.5, link ends
+  R6, leg depth 14, end and bottom walls 6, clamp walls 4, slider 16 long;
+  LEG_ANGLE_MIN 26 -> 28 to keep the link pins clear of the body. Body
+  wall stays 5 and links 4.5: the M5×25 bolts allow no more (0.5-0.6 mm
+  spare).
 - [ ] First test print and fit on the rifle.
 
 ## Open questions / things to check on the first print

@@ -16,7 +16,7 @@
     "_note": "Two-piece clamp: the fixed jaw is part of the body, the moving jaw is a separate part pulled in by bolts that run across under the rail into nuts slid into traps in the fixed side. Printed recoil lugs on the clamp floor sit in the rail's cross slots.",
     "CLAMP_LENGTH": 46.0,
     "_CLAMP_LENGTH": "Length of the rail clamp along the rail (X). The body under it is longer; its length comes from the linkage",
-    "CLAMP_WALL": 3.0,
+    "CLAMP_WALL": 4.0,
     "_CLAMP_WALL": "Side wall outside the rail top width",
     "CLAMP_FLOOR": 10.6,
     "_CLAMP_FLOOR": "Base plate top to rail top. The clamp bolts and nut traps run through here, under the rail",
@@ -36,9 +36,9 @@
     "LUG_COUNT": 2,
     "LUG_SPACING_SLOTS": 1,
     "_LUG_SPACING_SLOTS": "Recoil lug spacing in rail slot pitches (1 = 10.01 mm)",
-    "LUG_HEIGHT": 2.0,
+    "LUG_HEIGHT": 2.5,
     "_LUG_HEIGHT": "How far the lugs reach into the rail slots (slots are RAIL_SLOT_DEPTH deep)",
-    "LUG_WIDTH": 4.8,
+    "LUG_WIDTH": 5.0,
     "_LUG_WIDTH": "Along the rail; the slots are RAIL_SLOT_WIDTH wide",
     "BASE_PLATE": 4.0,
     "_BASE_PLATE": "Plate the moving jaw rests on; also the roof of the screw channel"
@@ -48,11 +48,11 @@
     "_note": "Open-bottomed channel under the clamp that holds the lead screw, slider and links.",
     "WALL": 5.0,
     "_WALL": "Side wall thickness",
-    "END_WALL": 5.0,
+    "END_WALL": 6.0,
     "_END_WALL": "End walls carry the screw: the knob pushes on one, the screw tip sits in the other",
-    "BOTTOM_WALL": 5.0,
+    "BOTTOM_WALL": 6.0,
     "_BOTTOM_WALL": "Material under the leg pin hole and under the slider pin slots, along the bottom edge of the side walls. The leg's load comes in here",
-    "SIDE_CLEARANCE": 0.3,
+    "SIDE_CLEARANCE": 0.2,
     "_SIDE_CLEARANCE": "Gap on each side between parts that slide or swing past each other",
     "EDGE_RADIUS": 2.0
   },
@@ -65,7 +65,7 @@
     "SCREW_THREAD_DEPTH": 1.0,
     "SCREW_THREAD_CLEARANCE": 0.15,
     "_SCREW_THREAD_CLEARANCE": "Added to the slider's internal thread, radially and axially. Raise if the slider binds",
-    "SCREW_HOLE_CLEARANCE": 0.3,
+    "SCREW_HOLE_CLEARANCE": 0.2,
     "_SCREW_HOLE_CLEARANCE": "Radial gap for the screw journal and tip in the end walls",
     "CLIP_DIAMETER": 15.0,
     "CLIP_THICKNESS": 3.0,
@@ -74,7 +74,7 @@
   },
 
   "slider": {
-    "SLIDER_LENGTH": 14.0,
+    "SLIDER_LENGTH": 16.0,
     "_SLIDER_LENGTH": "Length of thread engagement",
     "SLIDER_WALL": 3.0,
     "_SLIDER_WALL": "Material around the screw thread"
@@ -88,18 +88,18 @@
     "_LINK_PIVOT": "Leg pin to link pin, along the leg",
     "LINK_LENGTH": 34.0,
     "_LINK_LENGTH": "Link pin to slider pin",
-    "LEG_ANGLE_MIN": 26.0,
+    "LEG_ANGLE_MIN": 28.0,
     "_LEG_ANGLE_MIN": "Leg angle below horizontal when fully retracted (slider against the far end wall)",
     "LEG_ANGLE_MAX": 70.0,
     "_LEG_ANGLE_MAX": "Leg angle when fully extended (slider runs off the thread onto the screw journal)",
     "LEG_WIDTH": 10.0,
     "_LEG_WIDTH": "Leg thickness across the rifle; also the slider tongue the links straddle",
-    "LEG_DEPTH": 12.0,
+    "LEG_DEPTH": 14.0,
     "_LEG_DEPTH": "Depth of the leg beam",
     "LEG_HUB_RADIUS": 7.0,
     "_LEG_HUB_RADIUS": "Round ends of the leg around the leg and foot pins",
-    "LINK_THICKNESS": 4.0,
-    "LINK_END_RADIUS": 5.5
+    "LINK_THICKNESS": 4.5,
+    "LINK_END_RADIUS": 6.0
   },
 
   "hardware": {
@@ -107,17 +107,17 @@
     "BOLT_DIAMETER": 5.0,
     "BOLT_LENGTH": 25.0,
     "_BOLT_LENGTH": "Under-head length",
-    "BOLT_HOLE_CLEARANCE": 0.3,
+    "BOLT_HOLE_CLEARANCE": 0.2,
     "BOLT_HEAD_DIAMETER": 8.5,
     "BOLT_HEAD_HEIGHT": 5.0,
     "WASHER_DIAMETER": 10.0,
     "WASHER_THICKNESS": 1.0,
     "NUT_ACROSS_FLATS": 8.0,
     "NUT_THICKNESS": 4.0,
-    "NUT_CLEARANCE": 0.25,
+    "NUT_CLEARANCE": 0.2,
     "BUSHING_DIAMETER": 8.5,
     "_BUSHING_DIAMETER": "Printed tube the slider, link and foot pins turn on; the bolt clamps it solid so the plain nut can be tightened",
-    "BUSHING_CLEARANCE": 0.2,
+    "BUSHING_CLEARANCE": 0.15,
     "_BUSHING_CLEARANCE": "Radial gap between the bushing and the hole it turns in"
   },
 
@@ -139,7 +139,7 @@
     "_SLED_CORNER_RADIUS": "Corner rounding seen from above",
     "FOOT_PIVOT_HEIGHT": 8.0,
     "_FOOT_PIVOT_HEIGHT": "Foot pin above the deck top",
-    "CHEEK_THICKNESS": 4.0,
+    "CHEEK_THICKNESS": 4.5,
     "_CHEEK_THICKNESS": "Cheeks either side of the leg end"
   },
 
